@@ -12,6 +12,7 @@ I am not responsible for any production environment breaking if you use this cod
 
 It looks like it works, but I cannot guarantee valid results, or performance issues
 
+
 ## Requirements
 
 * Hyva Theme for Magento
