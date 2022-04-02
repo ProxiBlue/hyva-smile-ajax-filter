@@ -30,7 +30,7 @@ https://youtu.be/wmoKMndwJco
 * ./bin/magento setup:upgrade
 * ./bin/magento setup:di:compile
 
-## Known Issues / hings to still fix
+## Known Issues / things to still fix
 
 * Filters don't get removed if the current filtered products don't include them, which can be confusing.
 * Only works on checkbox attribute filters, swatches and slider filters are not (yet) ajaxed
