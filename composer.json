@@ -1,0 +1,22 @@
+{
+    "name": "proxi-blue/ajax-layer",
+    "version": "0.0.1",
+    "description": "Adjust smile elasticsuite with Hyva into an ajax layered filter navigation",
+    "type": "magento2-module",
+    "require": {
+        "magento/framework": "*",
+        "hyva-themes/magento2-smile-elasticsuite": "~1.1",
+        "hyva-themes/magento2-default-theme": ">1.1.9"
+    },
+    "license": [
+        "MIT"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "ProxiBlue\\AjaxLayer\\": ""
+        }
+    }
+}

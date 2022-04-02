@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="filter-ajax-js"
+                   template="ProxiBlue_AjaxLayer::catalog/layer/js/filter-ajax-js.phtml"
+            />
+        </referenceBlock>
+        <referenceBlock name="category.products.list">
+                <action method="setTemplate">
+                        <argument name="template" xsi:type="string">ProxiBlue_AjaxLayer::product/list.phtml</argument>
+                </action>
+        </referenceBlock>
+        <referenceBlock name="product_list_toolbar">
+                <action method="setTemplate">
+                        <argument name="template" xsi:type="string">ProxiBlue_AjaxLayer::product/list/toolbar.phtml</argument>
+                </action>
+        </referenceBlock>
+    </body>
+</page>

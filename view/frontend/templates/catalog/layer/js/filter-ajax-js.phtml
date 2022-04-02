@@ -1,0 +1,64 @@
+<?php
+
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\Escaper;
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\CurrentCategory;
+
+/** @var ViewModelRegistry $viewModels */
+
+$currentCategoryViewModel = $viewModels->require(CurrentCategory::class);
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+?>
+
+<script>
+    function filterByAjax() {
+        let request_var = '';
+        let checkedBoxes = document.querySelectorAll('.filter-options-content input[type=checkbox]:checked');
+        for(var checkbox of checkedBoxes.entries()) {
+            var value = checkbox[1].getAttribute('value');
+            var label = checkbox[1].getAttribute('data-label');
+            request_var = request_var + value +"="+label+"&";
+        };
+        fetch("<?= $block->getBaseUrl() . 'ajaxfilter/index/index/'?>?" + new URLSearchParams({
+            request_var: request_var,
+            category_id: <?= $currentCategoryViewModel->get()->getId() ?>,
+            page_size : window.current_limiter
+        }), {
+            method: 'GET',
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                document.getElementById('ajax-product-list').outerHTML = data.category_products;
+                executeScriptElements(document.getElementById('ajax-product-list'));
+                Alpine.discoverUninitializedComponents(function(el){ Alpine.initializeComponent(el) })
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
+    function changeLimiter(value) {
+        window.current_limiter = value;
+        filterByAjax();
+    }
+
+    function executeScriptElements(containerElement) {
+        const scriptElements = containerElement.querySelectorAll("script");
+
+        Array.from(scriptElements).forEach((scriptElement) => {
+            const clonedElement = document.createElement("script");
+
+            Array.from(scriptElement.attributes).forEach((attribute) => {
+                clonedElement.setAttribute(attribute.name, attribute.value);
+            });
+
+            clonedElement.text = scriptElement.text;
+
+            scriptElement.parentNode.replaceChild(clonedElement, scriptElement);
+        });
+    }
+
+</script>

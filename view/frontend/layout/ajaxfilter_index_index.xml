@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="catalog_category_view" />
+    <body>
+        <attribute name="class" value="ajax-page-with-filter"/>
+        <referenceContainer name="header.container" remove="true" />
+        <referenceContainer name="footer" remove="true" />
+        <referenceBlock name="page.main.title" remove="true" />
+        <referenceContainer name="category.view.container" remove="true" />
+        <referenceContainer name="sidebar.additional" remove="true" />
+        <referenceBlock name="breadcrumbs" remove="true" />
+        <referenceContainer name="sidebar.main">
+            <block class="Magento\LayeredNavigation\Block\Navigation\Category" name="catalog.leftnav" before="-"
+                   template="Hyva_SmileElasticsuite::catalog/layer/view.phtml">
+                <block class="Magento\LayeredNavigation\Block\Navigation\State" name="catalog.navigation.state" as="state" />
+            </block>
+        </referenceContainer>
+    </body>
+</page>

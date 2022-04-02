@@ -1,0 +1,58 @@
+<?php
+
+use Magento\Catalog\Block\Product\ListProduct;
+use Magento\Framework\Escaper;
+
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+
+/** @var ListProduct $block */
+/** @var Escaper $escaper */
+
+$productCollection = $block->getLoadedProductCollection();
+?>
+<?php if (!$productCollection->count()):?>
+    <div class="message info empty" id="ajax-product-list">
+        <div>
+            <?= $escaper->escapeHtml(__('We can\'t find products matching the selection.')) ?>
+        </div>
+    </div>
+<?php else:?>
+<section class="py-8" id="ajax-product-list">
+    <?= $block->getToolbarHtml() ?>
+    <?= $block->getAdditionalHtml() ?>
+    <?php
+    if ($block->getMode() == 'grid') {
+        $viewMode = 'grid';
+        $imageDisplayArea = 'category_page_grid';
+        $showDescription = false;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    } else {
+        $viewMode = 'list';
+        $imageDisplayArea = 'category_page_list';
+        $showDescription = true;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
+    }
+    /**
+     * Position for actions regarding image size changing in vde if needed
+     */
+    $pos = $block->getPositioned();
+    ?>
+    <div class="products wrapper mode-<?= /* @noEscape */ $viewMode ?> products-<?= /* @noEscape */ $viewMode ?>">
+        <div class="mx-auto pt-4 pb-12 grid gap-4 <?= $viewMode === 'grid' ? 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4' : 'grid-cols-1' ?>">
+            <?php /** @var \Magento\Catalog\Model\Product $product */ ?>
+            <?php foreach ($productCollection as $product):?>
+                <?= $block->getLayout()->getBlock('product_list_item')
+                    ->setData('product', $product)
+                    ->setData('view_mode', $viewMode)
+                    ->setData('image_display_area', $imageDisplayArea)
+                    ->setData('show_description', $showDescription)
+                    ->setData('position', $pos)
+                    ->setData('pos', $pos)
+                    ->setData('template_type', $templateType)
+                    ->toHtml(); ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <?= $block->getToolbarHtml() ?>
+</section>
+<?php endif; ?>
