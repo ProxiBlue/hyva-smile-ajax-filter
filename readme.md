@@ -18,12 +18,19 @@ It looks like it works, but I cannot guarantee valid results, or performance iss
 * Smile ElasticSuite Search with Autocomplete enabled
 * Hyva Smile Compatibility module
 
+Make sure you have Smile elasticuite working prior to installing this (setup/configured and indexed) else it will look like this module is breaking filtering.
+
 ## Install
 
 * composer config repositories.github.repo.repman.io composer https://github.repo.repman.io
 * composer require proxi-blue/ajax-layer
 * ./bin/magento setup:upgrade
 * ./bin/magento setup:di:compile
+
+## Known Issues / hings to still fix
+
+* Filters don't get removed if the current filtered products don't include them, which can be confusing.
+* Only works on checkbox attribute filters, swatches and slider filters are not (yet) ajaxed
 
 ## Configuration
 
