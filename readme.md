@@ -5,9 +5,11 @@
 ## Introduction
 
 This is a conceptual idea / playing around to turn the normal page reload filters into an AJAX based system
+
 None of the results were checked if valid, and code is not super clean - Use purely for own ideas / implementation (at this stage)
 
 I am not responsible for any production environment breaking if you use this code without your own testing.
+
 It looks like it works, but I cannot guarantee valid results, or performance issues
 
 ## Requirements
