@@ -21,6 +21,8 @@ It looks like it works, but I cannot guarantee valid results, or performance iss
 
 Make sure you have Smile elasticuite working prior to installing this (setup/configured and indexed) else it will look like this module is breaking filtering.
 
+https://youtu.be/wmoKMndwJco
+
 ## Install
 
 * composer config repositories.github.repo.repman.io composer https://github.repo.repman.io
